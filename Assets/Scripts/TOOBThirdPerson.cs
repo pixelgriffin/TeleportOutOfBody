@@ -58,7 +58,7 @@ public class TOOBThirdPerson : MonoBehaviour {
                     if(hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
                     {
                         LeaveBody();
-                        this.transform.position += new Vector3(0, 1.5f, 0);
+                        this.transform.position += new Vector3(0, 2.5f, 0);
                     }
                 }
                 else//Out of body
@@ -108,7 +108,7 @@ public class TOOBThirdPerson : MonoBehaviour {
             //Raycast rejoin
             if (Physics.Linecast(player.hmdTransform.position, body.transform.position, 1 << LayerMask.NameToLayer("Obstacle")))
             {
-                RejoinBody();
+                //RejoinBody();
             }
         }
 	}
