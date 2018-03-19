@@ -1,0 +1,5 @@
+03/19/2018 4:10 PM
+firstObstacleCheckpointTime=0
+secondObstacleCheckpointTime=0
+upstairsCheckpointTime=94.59892
+downstairsCheckpointTime=0

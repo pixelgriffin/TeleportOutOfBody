@@ -118,7 +118,16 @@ public class TOOBThirdPerson : MonoBehaviour {
         Vector3 flatForward = player.hmdTransform.forward;
         flatForward.y = 0;
 
+        RaycastHit hit;
+        Physics.Raycast(player.hmdTransform.position, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Obstacle"));
+
         body.transform.position = player.transform.position + flatForward * 2f;
+
+        if(hit.collider != null)
+        {
+            body.transform.position = new Vector3(body.transform.position.x, hit.point.y + 2f, body.transform.position.z);
+        }
+
         body.SetActive(true);
         outOfBody = true;
     }

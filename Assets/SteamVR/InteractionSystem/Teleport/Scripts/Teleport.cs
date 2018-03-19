@@ -110,6 +110,8 @@ namespace Valve.VR.InteractionSystem
         private Vector3 startingFeetOffset = Vector3.zero;
         private bool movedFeetFarEnough = false;
 
+        private bool hitWalkable = false;
+
         SteamVR_Events.Action chaperoneInfoInitializedAction;
 
         //Dash stuff
@@ -332,7 +334,8 @@ namespace Valve.VR.InteractionSystem
             realArcDistance = Mathf.Lerp(realArcDistance, arcDistance, arcGrowthRate * Time.deltaTime);
 
             //TeleportMarkerBase hitTeleportMarker = null;
-            bool hitWalkable = false;
+            //bool hitWalkable = false;
+            hitWalkable = false;
 
             //Check pointer angle
             float dotUp = Vector3.Dot(pointerDir, Vector3.up);
@@ -829,7 +832,7 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         private void TryTeleportPlayer()
         {
-            if (visible && !teleporting)
+            if (visible && !teleporting && hitWalkable)
             {
                 //if ( pointedAtTeleportMarker != null && pointedAtTeleportMarker.locked == false )
                 //{
