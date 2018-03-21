@@ -364,6 +364,11 @@ namespace Valve.VR.InteractionSystem
                 hitWalkable = false;
             }
 
+            if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Stairs"))
+            {
+                hitWalkable = true;
+            }
+
             //HighlightSelected( hitTeleportMarker );
 
             //if ( hitTeleportMarker != null ) //Hit a teleport marker

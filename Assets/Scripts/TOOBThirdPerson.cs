@@ -58,12 +58,12 @@ public class TOOBThirdPerson : MonoBehaviour {
                     if(hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
                     {
                         LeaveBody();
-                        this.transform.position += new Vector3(-player.hmdTransform.forward.x, 2.5f, -player.hmdTransform.forward.z);
+                        this.transform.position += new Vector3(-player.hmdTransform.forward.x * 3f, 2.5f, -player.hmdTransform.forward.z * 3f);
                     }
                 }
                 else//Out of body
                 {
-                    if (hand.GuessCurrentHandType() == Hand.HandType.Right)
+                    //if (hand.GuessCurrentHandType() == Hand.HandType.Right)
                     {
                         Vector3 flatForward = player.hmdTransform.forward;
                         flatForward.y = 0;
@@ -89,14 +89,14 @@ public class TOOBThirdPerson : MonoBehaviour {
                             RejoinBody();
                         }
                     }
-                    else
+                    /*else
                     {
                         if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
                         {
-                            body.GetComponent<Rigidbody>().AddForce(Vector3.up * 10000f, ForceMode.Impulse);
+                            //body.GetComponent<Rigidbody>().AddForce(Vector3.up * 10000f, ForceMode.Impulse);
                             //body.transform.Find("Model").GetComponent<Animator>().SetBool("Jump", true);
                         }
-                    }
+                    }*/
                 }
             }
         }
@@ -134,8 +134,8 @@ public class TOOBThirdPerson : MonoBehaviour {
 
     private void RejoinBody()
     {
-        player.transform.position = body.transform.position;
-        player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        player.transform.position = body.transform.position - new Vector3(player.hmdTransform.localPosition.x, 0, player.hmdTransform.localPosition.z);
+        //player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
 
         body.SetActive(false);
 
