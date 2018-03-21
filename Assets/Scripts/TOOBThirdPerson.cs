@@ -58,7 +58,7 @@ public class TOOBThirdPerson : MonoBehaviour {
                     if(hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
                     {
                         LeaveBody();
-                        this.transform.position += new Vector3(0, 2.5f, 0);
+                        this.transform.position += new Vector3(-player.hmdTransform.forward.x, 2.5f, -player.hmdTransform.forward.z);
                     }
                 }
                 else//Out of body
@@ -118,15 +118,15 @@ public class TOOBThirdPerson : MonoBehaviour {
         Vector3 flatForward = player.hmdTransform.forward;
         flatForward.y = 0;
 
-        RaycastHit hit;
-        Physics.Raycast(player.hmdTransform.position, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Obstacle"));
+        //RaycastHit hit;
+        //Physics.Raycast(player.hmdTransform.position, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Obstacle"));
 
-        body.transform.position = player.transform.position + flatForward * 2f;
+        body.transform.position = player.transform.position + new Vector3(player.hmdTransform.localPosition.x, 0f, player.hmdTransform.localPosition.z);// + flatForward * 2f;
 
-        if(hit.collider != null)
+        /*if(hit.collider != null)
         {
             body.transform.position = new Vector3(body.transform.position.x, hit.point.y + 2f, body.transform.position.z);
-        }
+        }*/
 
         body.SetActive(true);
         outOfBody = true;
