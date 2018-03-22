@@ -364,7 +364,7 @@ namespace Valve.VR.InteractionSystem
                 hitWalkable = false;
             }
 
-            if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Stairs"))
+            if(hitInfo.collider != null && hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Stairs"))
             {
                 hitWalkable = true;
             }
@@ -931,6 +931,7 @@ namespace Valve.VR.InteractionSystem
                 if(hit.collider != null)
                 {
                     hit.collider.GetComponent<TimedCheckpoint>().CompleteCheckpoint();
+                    Debug.Log("Ran into " + hit.collider.name);
                 }
 
                 //if (InteractionManager.Instance.moveType == InteractionManager.MovementType.TELEPORT)

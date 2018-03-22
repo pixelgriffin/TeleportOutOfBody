@@ -34,7 +34,7 @@ public class Statistics : SingletonComponent<Statistics> {
             sw.WriteLine("firstObstacleCheckpointTime=" + data.firstObstacleCheckpointTime);
             sw.WriteLine("secondObstacleCheckpointTime=" + data.secondObstacleCheckpointTime);
             sw.WriteLine("upstairsCheckpointTime=" + data.upstairsCheckpointTime);
-            sw.WriteLine("downstairsCheckpointTime=" + data.firstObstacleCheckpointTime);
+            sw.WriteLine("downstairsCheckpointTime=" + data.downstairsCheckpointTime);
         }
     }
 }

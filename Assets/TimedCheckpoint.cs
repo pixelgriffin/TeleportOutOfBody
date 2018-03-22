@@ -19,9 +19,9 @@ public class TimedCheckpoint : MonoBehaviour {
 
     public UnityEvent OnHitCheckpoint;
 
-    private float finishTime = 0f;
+    public float finishTime = 0f;
 
-    private bool hit = false;
+    public bool hit = false;
 
 	void Update () {
         if(!hit)
@@ -47,11 +47,10 @@ public class TimedCheckpoint : MonoBehaviour {
         {
             if (!hit)
             {
-                hit = true;
-
                 switch (checkpointType)
                 {
                     case CHECKPOINT_TYPE.DOWNSTAIRS:
+                        Debug.Log("Set downsatirs time to " + GetFinishTime());
                         Statistics.Instance.data.downstairsCheckpointTime = GetFinishTime();
                         break;
 
@@ -69,6 +68,7 @@ public class TimedCheckpoint : MonoBehaviour {
                 }
 
                 OnHitCheckpoint.Invoke();
+                hit = true;
 
                 return true;
             }
