@@ -32,39 +32,48 @@ public class TimedCheckpoint : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            if (reliesOn == null || reliesOn.hit)
-            {
-                if (!hit)
-                {
-                    hit = true;
-
-                    switch(checkpointType)
-                    {
-                        case CHECKPOINT_TYPE.DOWNSTAIRS:
-                            Statistics.Instance.data.downstairsCheckpointTime = GetFinishTime();
-                            break;
-
-                        case CHECKPOINT_TYPE.UPSTAIRS:
-                            Statistics.Instance.data.upstairsCheckpointTime = GetFinishTime();
-                            break;
-
-                        case CHECKPOINT_TYPE.FIRST_OBSTACLE:
-                            Statistics.Instance.data.firstObstacleCheckpointTime = GetFinishTime();
-                            break;
-
-                        case CHECKPOINT_TYPE.SECOND_OBSTACLE:
-                            Statistics.Instance.data.secondObstacleCheckpointTime = GetFinishTime();
-                            break;
-                    }
-
-                    OnHitCheckpoint.Invoke();
-                }
-            }
+            CompleteCheckpoint();
         }
     }
 
     public float GetFinishTime()
     {
         return finishTime;
+    }
+
+    public bool CompleteCheckpoint()
+    {
+        if (reliesOn == null || reliesOn.hit)
+        {
+            if (!hit)
+            {
+                hit = true;
+
+                switch (checkpointType)
+                {
+                    case CHECKPOINT_TYPE.DOWNSTAIRS:
+                        Statistics.Instance.data.downstairsCheckpointTime = GetFinishTime();
+                        break;
+
+                    case CHECKPOINT_TYPE.UPSTAIRS:
+                        Statistics.Instance.data.upstairsCheckpointTime = GetFinishTime();
+                        break;
+
+                    case CHECKPOINT_TYPE.FIRST_OBSTACLE:
+                        Statistics.Instance.data.firstObstacleCheckpointTime = GetFinishTime();
+                        break;
+
+                    case CHECKPOINT_TYPE.SECOND_OBSTACLE:
+                        Statistics.Instance.data.secondObstacleCheckpointTime = GetFinishTime();
+                        break;
+                }
+
+                OnHitCheckpoint.Invoke();
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

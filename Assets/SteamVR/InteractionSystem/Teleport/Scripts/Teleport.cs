@@ -925,6 +925,14 @@ namespace Valve.VR.InteractionSystem
             {
                 Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 
+                RaycastHit hit;
+                Physics.Linecast(player.hmdTransform.position, teleportPosition + playerFeetOffset, out hit, 1 << LayerMask.NameToLayer("Checkpoint"));
+
+                if(hit.collider != null)
+                {
+                    hit.collider.GetComponent<TimedCheckpoint>().CompleteCheckpoint();
+                }
+
                 //if (InteractionManager.Instance.moveType == InteractionManager.MovementType.TELEPORT)
                 player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;//This is the line that changes the player's position. TODO
                 //else

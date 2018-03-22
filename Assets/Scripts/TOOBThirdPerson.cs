@@ -106,9 +106,10 @@ public class TOOBThirdPerson : MonoBehaviour {
         if (outOfBody)
         {
             //Raycast rejoin
-            if (Physics.Linecast(player.hmdTransform.position, body.transform.position, 1 << LayerMask.NameToLayer("Obstacle")))
+            Debug.DrawLine(player.hmdTransform.position, body.transform.position + new Vector3(0, 1.6f, 0));
+            if (Physics.Linecast(player.hmdTransform.position, body.transform.position + new Vector3(0, 1.6f, 0), 1 << LayerMask.NameToLayer("Obstacle")))
             {
-                //RejoinBody();
+                RejoinBody();
             }
         }
 	}
