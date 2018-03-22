@@ -7,6 +7,8 @@ TagManager:
   - FxTemporaire
   - projectile
   - Walkable
+  - UI
+  - MenuSettings
   layers:
   - Default
   - TransparentFX

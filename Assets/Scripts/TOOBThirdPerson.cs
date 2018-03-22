@@ -25,6 +25,8 @@ public class TOOBThirdPerson : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (MenuSettings.Instance.type != MenuSettings.MovmentType.TOOB)
+            return;
 
         //Hand controls ---------------------------------
 		foreach(Hand hand in player.hands)
