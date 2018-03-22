@@ -936,6 +936,11 @@ namespace Valve.VR.InteractionSystem
 
                 //if (InteractionManager.Instance.moveType == InteractionManager.MovementType.TELEPORT)
                 player.trackingOriginTransform.position = teleportPosition + playerFeetOffset;//This is the line that changes the player's position. TODO
+
+                if(Statistics.Instance.allowDataCollection)
+                {
+                    Statistics.Instance.data.teleportCount++;
+                }
                 //else
                 //    dashTo = teleportPosition + playerFeetOffset;
             }

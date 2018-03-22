@@ -59,6 +59,11 @@ public class TOOBThirdPerson : MonoBehaviour {
                     {
                         LeaveBody();
                         this.transform.position += new Vector3(-player.hmdTransform.forward.x * 3f, 2.5f, -player.hmdTransform.forward.z * 3f);
+
+                        if (Statistics.Instance.allowDataCollection)
+                        {
+                            Statistics.Instance.data.oobCount++;
+                        }
                     }
                 }
                 else//Out of body
