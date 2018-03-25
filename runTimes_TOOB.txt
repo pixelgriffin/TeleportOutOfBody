@@ -1,0 +1,7 @@
+03/25/2018 3:16 PM
+firstObstacleCheckpointTime=27.91294
+secondObstacleCheckpointTime=67.04948
+upstairsCheckpointTime=46.11866
+downstairsCheckpointTime=83.06621
+teleportCount=0
+oobCount=21

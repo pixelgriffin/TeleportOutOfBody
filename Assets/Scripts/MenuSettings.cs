@@ -13,11 +13,6 @@ public class MenuSettings : SingletonComponent<MenuSettings> {
     public MovmentType type;
 
 	void Start () {
-		if(GameObject.FindGameObjectsWithTag("MenuSettings").Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
-
         DontDestroyOnLoad(this.gameObject);
 	}
 }

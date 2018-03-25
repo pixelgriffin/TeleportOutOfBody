@@ -331,7 +331,7 @@ namespace Valve.VR.InteractionSystem
             //Vector3 arcVelocity = pointerDir * arcDistance;
             Vector3 arcVelocity = pointerDir * realArcDistance;
 
-            realArcDistance = Mathf.Lerp(realArcDistance, arcDistance, arcGrowthRate * Time.deltaTime);
+            realArcDistance = Mathf.MoveTowards(realArcDistance, arcDistance, arcGrowthRate * Time.deltaTime);
 
             //TeleportMarkerBase hitTeleportMarker = null;
             //bool hitWalkable = false;

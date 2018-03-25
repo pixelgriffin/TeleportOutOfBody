@@ -6,8 +6,13 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Player))]
 public class TOOBThirdPerson : MonoBehaviour {
 
+    public AudioClip teleportSound;
+    public AudioSource headSource;
+
     public GameObject body;
     public float speed = 3f;
+
+    public float fadeTime = 0.15f;
 
     private Player player;
 
@@ -121,26 +126,52 @@ public class TOOBThirdPerson : MonoBehaviour {
         }
 	}
 
+    private void PlayAudioClip(AudioSource source, AudioClip clip)
+    {
+        source.clip = clip;
+        source.Play();
+    }
+
     private void LeaveBody()
     {
-        Vector3 flatForward = player.hmdTransform.forward;
-        flatForward.y = 0;
-
-        //RaycastHit hit;
-        //Physics.Raycast(player.hmdTransform.position, Vector3.down, out hit, 100f, 1 << LayerMask.NameToLayer("Obstacle"));
-
-        body.transform.position = player.transform.position + new Vector3(player.hmdTransform.localPosition.x, 0f, player.hmdTransform.localPosition.z);// + flatForward * 2f;
-
-        /*if(hit.collider != null)
+        if (!IsInvoking("RealLeave"))
         {
-            body.transform.position = new Vector3(body.transform.position.x, hit.point.y + 2f, body.transform.position.z);
-        }*/
+            SteamVR_Fade.Start(Color.clear, 0);
+            SteamVR_Fade.Start(Color.black, fadeTime);
 
+            Vector3 flatForward = player.hmdTransform.forward;
+            flatForward.y = 0;
+
+            body.transform.position = player.transform.position + new Vector3(player.hmdTransform.localPosition.x, 0f, player.hmdTransform.localPosition.z);// + flatForward * 2f;
+
+            PlayAudioClip(headSource, teleportSound);
+
+            Invoke("RealLeave", fadeTime);
+        }
+    }
+
+    private void RealLeave()
+    {
         body.SetActive(true);
         outOfBody = true;
+
+        SteamVR_Fade.Start(Color.clear, fadeTime);
     }
 
     private void RejoinBody()
+    {
+        if (!IsInvoking("RealRejoin"))
+        {
+            SteamVR_Fade.Start(Color.clear, 0);
+            SteamVR_Fade.Start(Color.black, fadeTime);
+
+            PlayAudioClip(headSource, teleportSound);
+
+            Invoke("RealRejoin", fadeTime);
+        }
+    }
+
+    private void RealRejoin()
     {
         player.transform.position = body.transform.position - new Vector3(player.hmdTransform.localPosition.x, 0, player.hmdTransform.localPosition.z);
         //player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
@@ -148,6 +179,8 @@ public class TOOBThirdPerson : MonoBehaviour {
         body.SetActive(false);
 
         outOfBody = false;
+
+        SteamVR_Fade.Start(Color.clear, fadeTime);
     }
 
     public bool IsOutOfBody()
