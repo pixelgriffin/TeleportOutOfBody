@@ -62,7 +62,7 @@ public class TOOBThirdPerson : MonoBehaviour {
                         detachingFromBody = false;
                         this.transform.position -= new Vector3(0, this.transform.position.y, 0);
                     }*/
-                    if(hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+                    if(hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
                     {
                         LeaveBody();
                         this.transform.position += new Vector3(-player.hmdTransform.forward.x * 3f, 2.5f, -player.hmdTransform.forward.z * 3f);
@@ -96,7 +96,7 @@ public class TOOBThirdPerson : MonoBehaviour {
 
                         body.transform.Find("Model").rotation = Quaternion.Euler(0, player.hmdTransform.eulerAngles.y, 0);
 
-                        if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+                        if (hand.controller.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
                         {
                             RejoinBody();
                         }

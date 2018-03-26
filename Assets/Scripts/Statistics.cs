@@ -24,14 +24,15 @@ public class Statistics : SingletonComponent<Statistics> {
 
     public bool allowDataCollection = true;
 
-    private StreamWriter leftHandSW, rightHandSW, headSW;
+    private StreamWriter leftHandSW, rightHandSW, headSW, localSW;
 
 	void Start () {
         data = new Data();
 
         leftHandSW = new StreamWriter("leftHand" + MenuSettings.Instance.type.ToString() + ".txt");
         rightHandSW = new StreamWriter("rightHand" + MenuSettings.Instance.type.ToString() + ".txt");
-        headSW = new StreamWriter("head" + MenuSettings.Instance.type.ToString() + ".txt");
+        headSW = new StreamWriter("headForwardVector" + MenuSettings.Instance.type.ToString() + ".txt");
+        localSW = new StreamWriter("headLocalPosition" + MenuSettings.Instance.type.ToString() + ".txt");
 	}
 	
 	void Update () {
@@ -50,6 +51,8 @@ public class Statistics : SingletonComponent<Statistics> {
             }
 
             headSW.WriteLine(player.hmdTransform.forward.x + "," + player.hmdTransform.forward.y + "," + player.hmdTransform.forward.z);
+
+            localSW.WriteLine(player.hmdTransform.localPosition.x + "," + player.hmdTransform.localPosition.y + "," + player.hmdTransform.localPosition.z);
         }
 	}
 
@@ -69,6 +72,7 @@ public class Statistics : SingletonComponent<Statistics> {
         leftHandSW.Flush();
         rightHandSW.Flush();
         headSW.Flush();
+        localSW.Flush();
     }
 
     public void Close()
@@ -76,5 +80,6 @@ public class Statistics : SingletonComponent<Statistics> {
         leftHandSW.Close();
         rightHandSW.Close();
         headSW.Close();
+        localSW.Close();
     }
 }
